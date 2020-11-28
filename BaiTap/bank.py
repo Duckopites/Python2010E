@@ -62,7 +62,7 @@ def check_account_and_password():
     global money_check
     global account_state
 
-    retVal = FINISH
+    main_state = FINISH
     csv_file = 'input.csv'
     #Enter account and check
     if account_state == ENTER_ACCOUNT:
@@ -74,7 +74,7 @@ def check_account_and_password():
             print("Xin chao: " + user_name)
             # Acc is valid, jump in to enter password
             account_state = ENTER_PASSWORD
-            retVal = CHECK_ACCOUNT
+            main_state = CHECK_ACCOUNT
         else:
             count_enter_account += 1
             print("Số tài khoản không đúng. Vui lòng lựa chọn")
@@ -84,30 +84,30 @@ def check_account_and_password():
             if count_enter_account < 3:
                 user_name_option = int(input("Nhap lua chon: "))
                 if user_name_option == 1:
-                    retVal = CHECK_ACCOUNT
+                    main_state = CHECK_ACCOUNT
                     account_state = ENTER_ACCOUNT
                 elif user_name_option == 0:
-                    retVal = FINISH
+                    main_state = FINISH
             else:
                 print("Ngân hàng tạm thời giữ thẻ do bạn nhập sai tài khoản 3 lần. \
                         Vui lòng liên hệ nhân viên ngân hàng để được hỗ trợ")
-                retVal = FINISH
+                main_state = FINISH
     #Enter password and check
     elif account_state == ENTER_PASSWORD:
         password_input = int(input("Nhap mat khau: "))
         if password_input == password:
-            retVal = CHOOSE_OPTION
+            main_state = CHOOSE_OPTION
         else:
             print("Sai mat khau, vui long nhap lai.")
             if count_enter_password < 3:
-                retVal = CHECK_ACCOUNT
+                main_state = CHECK_ACCOUNT
                 account_state = ENTER_PASSWORD
                 count_enter_password += 1
             else:
                 print("Ngân hàng tạm thời giữ thẻ do bạn nhập sai mật khẩu 3 lần. \
                         Vui lòng liên hệ nhân viên ngân hàng để được hỗ trợ")
-                retVal = FINISH
-    return retVal
+                main_state = FINISH
+    return main_state
 
 def choose_option():
     """
