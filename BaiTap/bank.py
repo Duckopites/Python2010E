@@ -1,15 +1,21 @@
-#define MACRO and globle variable
+#define macro for account_state
 ENTER_ACCOUNT = 0
 ENTER_PASSWORD = 1
+
+#define macro for main state
 CHECK_ACCOUNT = 0
 CHOOSE_OPTION = 1
-FINISH = 3
-EXIT = 5
+FINISH = 2
+
+#define macro for option state
 MENU = 0
 CHECK_MONEY = 1
 WIDTHDRAW_CASH = 2
 TRANSFER_MONEY = 3
 CHANGE_PASSWORD = 4
+EXIT = 5
+
+#define global variable
 account_state = 0
 money_check = 0
 user_name = ""
@@ -19,6 +25,7 @@ count_enter_account = 0
 count_enter_password = 0
 count_enter_cash = 0
 option_state = 0
+
 from datetime import datetime
 
 #check account whether exist in data file
