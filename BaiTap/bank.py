@@ -46,14 +46,13 @@ def check_acc_valid(acc_num, csv_file):
                 password = int(line.split(",")[2])
                 money_check = int(line.split(",")[3])
                 is_acc_valid = True
-    return is_acc_valid, user_name, password, money_check
+    return is_acc_valid
 
 #check account and password is correct
-def check_account_and_password():
+def enter_account_and_password():
     """
-    Check whether account, password is entered by user is correct.
-    If they are correct, allow user choose options. Otherwise, check if user enter over 3 times
-    => Lock account.
+    Check whether account, password is entered by user.If they are correct, allow user choose options.
+    Otherwise, lock account if user enter over 3 times.
     """
     global count_enter_account
     global count_enter_password
@@ -68,7 +67,7 @@ def check_account_and_password():
     if account_state == ENTER_ACCOUNT:
         acc_num = input("Nhap so tai khoan: ")
         #check account and get user name, password, money in data file
-        is_acc_valid, user_name, password, money_check = check_acc_valid(int(acc_num), csv_file)
+        is_acc_valid = check_acc_valid(int(acc_num), csv_file)
         if(is_acc_valid):
             print("NGAN HANG")
             print("Xin chao: " + user_name)
@@ -135,6 +134,9 @@ def choose_option():
             option_state = TRANSFER_MONEY
         elif option_enter == 4:
             option_state = CHANGE_PASSWORD
+        elif option_enter == 0:
+            option_state = EXIT
+
     # Check money in account
     elif option_state == CHECK_MONEY:
         print("NGAN HANG: ")
@@ -187,7 +189,7 @@ if __name__ == "__main__":
     state = CHECK_ACCOUNT
     while True:
         if state == CHECK_ACCOUNT:
-            state = check_account_and_password()
+            state = enter_account_and_password()
         # Enter option when user name and password is
         elif state == CHOOSE_OPTION:
             state = choose_option()
